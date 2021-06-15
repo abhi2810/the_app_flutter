@@ -17,55 +17,83 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
         appBar: AppBar(
           title: Text('Login Screen'),
         ),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
-                    hintText: 'Username'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter username';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
-                    hintText: 'Password'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter password';
-                  }
-                  return null;
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      setState(() {
-                        // _text = _textController.text;
-                      });
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text('Saving Data')));
-                    }
-                  },
-                  child: Text('Submit'),
+        body: _isLoggedIn
+            ? Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('Logged in as ${_usernameController.text}.'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _isLoggedIn = false;
+                            });
+                          },
+                          child: Text('Log out'),
+                        ),
+                      ),
+                    ]))
+            : Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    TextFormField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(
+                              left: 15, bottom: 11, top: 11, right: 15),
+                          hintText: 'Username'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter username';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      obscureText: true,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(
+                              left: 15, bottom: 11, top: 11, right: 15),
+                          hintText: 'Password'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (_usernameController.text == 'alice' &&
+                                _passwordController.text == 'mypassword') {
+                              setState(() {
+                                _isLoggedIn = true;
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          'Invalid username or password')));
+                            }
+                          }
+                        },
+                        child: Text('Submit'),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ));
+              ));
   }
 }
