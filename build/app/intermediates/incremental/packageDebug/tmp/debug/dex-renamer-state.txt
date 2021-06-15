@@ -1,0 +1,4 @@
+#Tue Jun 15 20:46:24 IST 2021
+base.0=/Users/abhi/Documents/the_app_flutter/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
