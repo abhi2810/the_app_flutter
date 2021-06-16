@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_driver/driver_extension.dart';
 import 'package:the_app_flutter/models/main_list_item.dart';
 import 'package:the_app_flutter/pages/echo_box.dart';
 import 'package:the_app_flutter/pages/login_screen_page.dart';
 
 void main() {
+  enableFlutterDriverExtension();
   runApp(App());
 }
 

@@ -21,7 +21,11 @@ class _EchoBoxPageState extends State<EchoBoxPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (_text != '') Text('Here\'s what you said:'),
-              if (_text != '') Text(_text),
+              if (_text != '')
+                Text(
+                  _text,
+                  key: Key('value'),
+                ),
               Form(
                 key: _formKey,
                 child: Column(

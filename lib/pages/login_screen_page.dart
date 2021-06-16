@@ -25,7 +25,10 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('Logged in as ${_usernameController.text}.'),
+                      Text(
+                        'Logged in as ${_usernameController.text}.',
+                        key: Key('loggedInAs'),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: ElevatedButton(
@@ -45,6 +48,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextFormField(
+                      key: Key('username'),
                       controller: _usernameController,
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(
@@ -58,6 +62,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                       },
                     ),
                     TextFormField(
+                      key: Key('password'),
                       obscureText: true,
                       controller: _passwordController,
                       decoration: InputDecoration(
